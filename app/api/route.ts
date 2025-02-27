@@ -1,12 +1,16 @@
 import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextApiRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
 
 
-  const { amount, betNumber } = req.body;
+  const data = await req.json();
 
   // Walidacja danych
+  console.log(data)
+
+  let {amount, betNumber} = data;
+
   if (typeof amount !== 'number' || typeof betNumber !== 'number') {
     return NextResponse.json({ error: 'Niepoprawne dane' });
 
